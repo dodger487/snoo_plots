@@ -4,14 +4,14 @@
 
 # To get data, make sure pip is installed. Then:
 # pip install snoo
-# snoo sessions --start START_DATE --end END_DATE > all_snoo_sessions.csv
+# snoo sessions --start START_DATE --end END_DATE > sleep_data.csv
 
 
 ################################################################################
 ##### Read and manipulate data.
 
 # Read in data.
-df <- read_csv("all_snoo_sessions.csv")
+df <- read_csv("sleep_data.csv")
 
 
 # Add rows for when baby is awake, the inverse of when baby is asleep.

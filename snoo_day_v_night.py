@@ -24,9 +24,8 @@ TIME_11_59_PM = datetime.time(hour=23, minute=59, second=59)
 
 # first, run 
 # pip install snoo
-# snoo sessions --start START_DATE --end END_DATE > all_snoo_sessions.csv
-# df = pd.read_csv("all_snoo_sessions.csv")
-df = pd.read_csv("all_snoo_sessions_2020-06-05.csv")
+# snoo sessions --start START_DATE --end END_DATE > sleep_data.csv
+df = pd.read_csv("sleep_data.csv")
 
 
 # Convert to pandas datetime.

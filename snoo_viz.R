@@ -140,6 +140,16 @@ rows %>%
 
 
 
+p <- (rows %>%
+        filter(session_type == "asleep") %>%
+        ggplot(aes(x=start_date), data=.) + 
+        geom_linerange(aes(ymin = start_time, ymax = end_time)) + 
+        scale_x_date(name="", date_labels="%b", expand=c(0, 0)) +
+        scale_y_time(labels = function(x) format(as.POSIXct(x), format = '%H:%M'),
+                     expand=c(0, 0, 0, 0.0001)) +
+        ggtitle("Baby Sleep Times") +
+        theme_minimal() 
+)
 
 
 ggplot(sessions, aes(x=relevant_time, y=start_date, group=id)) +

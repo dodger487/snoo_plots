@@ -12,8 +12,8 @@ from plotnine import *
 
 # first, run 
 # pip install snoo
-# snoo sessions --start START_DATE --end END_DATE > all_snoo_sessions.csv
-df = pd.read_csv("all_snoo_sessions.csv")
+# snoo sessions --start START_DATE --end END_DATE > sleep_data.csv
+df = pd.read_csv("sleep_data.csv")
 
 # Break out dates and times.
 df["start_datetime"] = pd.to_datetime(df["start_time"])
@@ -58,61 +58,3 @@ plot = (ggplot(aes(x="start_date",), data=rows)
 
 # Save it!
 ggsave(plot, "fig/lineplot_python.png", width=6.96, height=5.51, units="in", dpi=300)
-
-
-rows["end_date"] = rows["start_date"] + datetime.timedelta(days=1)
-
-import pylab as pl 
-
-
-
-plot1 = (ggplot(aes(), data=rows)
-  + geom_rect(aes(xmin = "start_date", xmax = "end_date",
-                  ymin = "start_time", ymax = "end_time"))
-  + scale_x_date(name="", date_labels="%b") 
-  + ggtitle("Baby Sleep Times")
-  + theme_minimal() 
-  + scale_y_datetime(
-        date_labels="%H:%M:%S", 
-        limits=(pd.to_datetime("00:00:00", format='%H:%M:%S'),
-                pd.to_datetime("19:59:59", format='%H:%M:%S')),
-        expand = (0,0))
-  # + scale_y_datetime(
-  #       date_labels="%H:%M:%S", )
-  # + ylim((pd.to_datetime("00:00:00", format='%H:%M:%S'),
-  #               pd.to_datetime("22:59:59", format='%H:%M:%S')))
-  + theme(panel_background=element_rect(fill="yellow"),)
-#           panel_spacing=0,
-#           plot_margin=0)
-)
-  
-
-plot2 = (ggplot(aes(), data=rows)
-  + geom_rect(aes(xmin = "start_date", xmax = "end_date",
-                  ymin = "start_time", ymax = "end_time"))
-  + scale_x_date(name="", date_labels="%b") 
-  + ggtitle("Baby Sleep Times")
-  + theme_minimal() 
-  + theme(plot_background=element_rect(color="white"))
-  + scale_y_datetime(
-        date_labels="%H:%M:%S", 
-        limits=(pd.to_datetime("00:00:00", format='%H:%M:%S'),
-                pd.to_datetime("22:59:59", format='%H:%M:%S')))
-  + ylim((pd.to_datetime("00:00:00", format='%H:%M:%S'),
-                pd.to_datetime("22:59:59", format='%H:%M:%S')))
-  + theme(axis_ticks_pad_major=0, axis)
-)
-
-
-pl.show()
-
-
-
-
-foo = pd.DataFrame({"x": [1,2,3], "y": [6,5,4]})
-
-(
-  ggplot(aes(x="x", y="y"), data=foo) 
-  + geom_point() 
-  + ylim(4, 6)
-)
